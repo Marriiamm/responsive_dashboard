@@ -46,6 +46,10 @@ class Assets {
   /// assets/icons/Frame.png
   static const String assetsIconsFrame = "assets/icons/Frame.png";
 
+  /// Assets for assetsIconsGallery
+  /// assets/icons/gallery.png
+  static const String assetsIconsGallery = "assets/icons/gallery.png";
+
   /// Assets for assetsIconsGraph
   /// assets/icons/graph.png
   static const String assetsIconsGraph = "assets/icons/graph.png";
@@ -57,6 +61,10 @@ class Assets {
   /// Assets for assetsIconsLogout
   /// assets/icons/logout.png
   static const String assetsIconsLogout = "assets/icons/logout.png";
+
+  /// Assets for assetsIconsMask group
+  /// assets/icons/Mask group.png
+  static const String assetsIconsMaskGroup = "assets/icons/Mask group.png";
 
   /// Assets for assetsIconsMoneyBills
   /// assets/icons/money_bills.png

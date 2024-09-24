@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_dash_board/utils/size_config.dart';
 import 'package:responsive_dash_board/views/widgets/customcontainer_background.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 import '../../models/income_model.dart';
 import '../../utils/app_styles.dart';
+import 'incomeChart_desktop.dart';
 
 class IncomeSection extends StatelessWidget {
   const IncomeSection({super.key});
@@ -14,21 +16,33 @@ class IncomeSection extends StatelessWidget {
         child: Column(
       children: [
         IncomeHeader(),
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 3,
-                child: IncomeChart()),
-              Expanded(
-                flex: 5,
-                child: IncomeDetails()),
-            ],
-          ),
-        ),
+        IncomeSectionBody(),
       ],
     ));
+  }
+}
+
+class IncomeSectionBody extends StatelessWidget {
+  const IncomeSectionBody({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    
+    double width = MediaQuery.sizeOf(context).width;
+    return width >= SizeConfig.desktop && width < 1620
+        ? const Expanded(flex: 2, child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: DesktopChart(),
+        ))
+        : const Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(flex: 2, child: IncomeChart()),
+              Expanded(flex: 5, child: IncomeDetails()),
+            ],
+          );
   }
 }
 
@@ -40,9 +54,9 @@ class IncomeHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
+         Text(
           "Income",
-          style: AppStyles.styleSemiBold20,
+          style: AppStyles.styleSemiBold20(context),
         ),
         Container(
           padding: const EdgeInsets.all(12),
@@ -53,16 +67,16 @@ class IncomeHeader extends StatelessWidget {
                 width: 1,
                 color: const Color(0XFFF1F1F1),
               )),
-          child: const Row(
+          child: Row(
             children: [
               Text(
                 "Monthly",
-                style: AppStyles.styleMedium16,
+                style: AppStyles.styleMedium16(context),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 18,
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_drop_down_rounded,
                 color: Color(0XFF064061),
               )
@@ -86,9 +100,7 @@ class _IncomeChartState extends State<IncomeChart> {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: PieChart(getChartData()));
+    return AspectRatio(aspectRatio: 1, child: PieChart(getChartData()));
   }
 
   PieChartData getChartData() {
@@ -136,18 +148,14 @@ class IncomeDetails extends StatelessWidget {
     IncomeModel(
         color: Color(0xff4DB7F2), title: "Design product", ratio: "25%"),
     IncomeModel(
-        color:  Color(0xff064060), title: "Product royalti", ratio: "20%"),
+        color: Color(0xff064060), title: "Product royalti", ratio: "20%"),
     IncomeModel(color: Color(0xffE2DECD), title: "Other", ratio: "22%"),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: items.length,
-      shrinkWrap: true,
-      itemBuilder: (BuildContext context, int index) {
-        return IncomeItemDetails(incomeModel: items[index]);
-      },
+    return Column(
+      children: items.map((e) => IncomeItemDetails(incomeModel: e)).toList(),
     );
   }
 }
@@ -170,12 +178,12 @@ class IncomeItemDetails extends StatelessWidget {
       ),
       title: Text(
         incomeModel.title,
-        style: AppStyles.styleRegular16,
+        style: AppStyles.styleRegular16(context),
       ),
       trailing: Text(
         incomeModel.ratio,
         //"40%",
-        style: AppStyles.styleMedium16,
+        style: AppStyles.styleMedium16(context),
       ),
     );
   }

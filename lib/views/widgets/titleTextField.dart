@@ -13,7 +13,7 @@ class TitleTextField extends StatelessWidget {
       children: [
         Text(
           title,
-          style: AppStyles.styleSemiBold16,
+          style: AppStyles.styleSemiBold16(context),
         ),
         const SizedBox(
           height: 6,
@@ -21,7 +21,7 @@ class TitleTextField extends StatelessWidget {
         TextField(
           decoration: InputDecoration(
               hintText: hint,
-              hintStyle: AppStyles.styleRegular16
+              hintStyle: AppStyles.styleRegular16(context)
                   .copyWith(color: const Color(0xffAAAAAA)),
               fillColor: const Color(0xffFAFAFA),
               filled: true,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_dash_board/utils/app_styles.dart';
 
-
 import 'expenses_item.dart';
 
 class AllExpenses extends StatelessWidget {
@@ -34,9 +33,9 @@ class AllExpensesHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
+        Text(
           "All Expenses",
-          style: AppStyles.styleSemiBold20,
+          style: AppStyles.styleSemiBold20(context),
         ),
         Container(
           padding: const EdgeInsets.all(12),
@@ -47,16 +46,16 @@ class AllExpensesHeader extends StatelessWidget {
                 width: 1,
                 color: const Color(0XFFF1F1F1),
               )),
-          child: const Row(
+          child: Row(
             children: [
               Text(
                 "Monthly",
-                style: AppStyles.styleMedium16,
+                style: AppStyles.styleMedium16(context),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 18,
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_drop_down_rounded,
                 color: Color(0XFF064061),
               )

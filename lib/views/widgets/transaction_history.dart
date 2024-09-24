@@ -13,13 +13,13 @@ class TransactionHistory extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+             Text(
               "Transaction History",
-              style: AppStyles.styleSemiBold20,
+              style: AppStyles.styleSemiBold20(context),
             ),
             Text(
               "See All",
-              style: AppStyles.styleRegular16
+              style: AppStyles.styleRegular16(context)
                   .copyWith(color: const Color(0xff4EB7F2)),
             ),
           ],
@@ -30,7 +30,7 @@ class TransactionHistory extends StatelessWidget {
         Text(
           "13 April 2022",
           style:
-              AppStyles.styleRegular16.copyWith(color: const Color(0xffAAAAAA)),
+              AppStyles.styleRegular16(context).copyWith(color: const Color(0xffAAAAAA)),
         ),
         const SizedBox(
           height: 16,
@@ -57,20 +57,20 @@ class TransactionItem extends StatelessWidget {
       child: ListTile(
         title: Text(
           transactionModel.title,
-          style: AppStyles.styleSemiBold16,
+          style: AppStyles.styleSemiBold16(context),
         ),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 5),
           child: Text(
             transactionModel.date,
-            style: AppStyles.styleRegular14.copyWith(
+            style: AppStyles.styleRegular14(context).copyWith(
               color: const Color(0xffAAAAAA),
             ),
           ),
         ),
         trailing: Text(
           transactionModel.amount,
-          style: AppStyles.styleSemiBold20.copyWith(
+          style: AppStyles.styleSemiBold20(context).copyWith(
               color: transactionModel.isWithDrawal
                   ? const Color(0xffF3735E)
                   : const Color(0xff7CD87A)),
@@ -103,11 +103,15 @@ class TransactionHistoryListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        shrinkWrap: true,
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return TransactionItem(transactionModel: items[index]);
-        });
+    return Column(
+      children: items.map((e) => TransactionItem(transactionModel: e)).toList(),
+    );
+
+    //  ListView.builder(
+    //     shrinkWrap: true,
+    //     itemCount: items.length,
+    //     itemBuilder: (context, index) {
+    //       return TransactionItem(transactionModel: items[index]);
+    //     });
   }
 }

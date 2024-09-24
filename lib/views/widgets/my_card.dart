@@ -31,9 +31,9 @@ class _MyCardState extends State<MyCard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+         Text(
           "My Card",
-          style: AppStyles.styleSemiBold20,
+          style: AppStyles.styleSemiBold20(context),
         ),
         const SizedBox(
           height: 20,
@@ -76,11 +76,11 @@ class CardItem extends StatelessWidget {
                   const EdgeInsets.only(left: 31, right: 42, top: 12),
               title: Text(
                 "Name card",
-                style: AppStyles.styleRegular16.copyWith(color: Colors.white),
+                style: AppStyles.styleRegular16(context).copyWith(color: Colors.white),
               ),
-              subtitle: const Text(
+              subtitle:  Text(
                 "Syah Bandi",
-                style: AppStyles.styleMedium20,
+                style: AppStyles.styleMedium20(context),
               ),
               trailing: Image.asset(Assets.assetsIconsGallery),
             ),
@@ -89,7 +89,7 @@ class CardItem extends StatelessWidget {
               padding: const EdgeInsets.only(right: 24),
               child: Text(
                 "0918 8124 0042 8129",
-                style: AppStyles.styleSemiBold24.copyWith(color: Colors.white),
+                style: AppStyles.styleSemiBold24(context).copyWith(color: Colors.white),
               ),
             ),
             const SizedBox(
@@ -99,7 +99,7 @@ class CardItem extends StatelessWidget {
               padding: const EdgeInsets.only(right: 24, bottom: 24),
               child: Text(
                 "12/20 - 124",
-                style: AppStyles.styleRegular16.copyWith(color: Colors.white),
+                style: AppStyles.styleRegular16(context).copyWith(color: Colors.white),
               ),
             ),
           ],

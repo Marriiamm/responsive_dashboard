@@ -10,17 +10,17 @@ class LatestTransaction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           "Latest Transactions",
-          style: AppStyles.styleMedium16,
+          style: AppStyles.styleMedium16(context),
         ),
-        SizedBox(
+        const SizedBox(
           height: 6,
         ),
-        LatestTransactionListView(),
+        const LatestTransactionListView(),
       ],
     );
   }
@@ -71,7 +71,7 @@ class LatestTransactionListView extends StatelessWidget {
           itemBuilder: (context, index) {
             return IntrinsicWidth(
               child: Card(
-                color: Color(0xffFAFAFA),
+                color: const Color(0xffFAFAFA),
                 elevation: 0,
                 child: Center(
                   child: UserInfoList(

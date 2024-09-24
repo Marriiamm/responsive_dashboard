@@ -31,10 +31,10 @@ class _DrawerItemsListState extends State<DrawerItemsList> {
         return GestureDetector(
           onTap: () {
             if (activeIndex != index) {
-  setState(() {
-    activeIndex = index;
-  });
-}
+              setState(() {
+                activeIndex = index;
+              });
+            }
           },
           child: Padding(
             padding: const EdgeInsets.only(top: 12),

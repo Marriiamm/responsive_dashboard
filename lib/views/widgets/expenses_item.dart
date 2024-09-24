@@ -43,16 +43,23 @@ class InActiveExItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 60,
-                height: 60,
-                decoration: const ShapeDecoration(
-                    shape: OvalBorder(), color: Color(0XFFFAFAFA)),
-                child: Image.asset(expensesItemModel.image),
-              ),
-              const SizedBox(
-                width: 56,
+              Flexible(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 60,
+                  ),
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: Container(
+                      decoration: const ShapeDecoration(
+                          shape: OvalBorder(), color: Color(0XFFFAFAFA)),
+                      child:
+                          Center(child: Image.asset(expensesItemModel.image)),
+                    ),
+                  ),
+                ),
               ),
               const Icon(
                 Icons.arrow_forward_ios,
@@ -63,23 +70,32 @@ class InActiveExItem extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          Text(
-            expensesItemModel.title,
-            style: AppStyles.styleSemiBold16,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              expensesItemModel.title,
+              style: AppStyles.styleSemiBold16(context),
+            ),
           ),
           const SizedBox(
             height: 8,
           ),
-          Text(
-            expensesItemModel.date,
-            style: AppStyles.styleRegular14,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              expensesItemModel.date,
+              style: AppStyles.styleRegular14(context),
+            ),
           ),
           const SizedBox(
             height: 16,
           ),
-          Text(
-            expensesItemModel.price,
-            style: AppStyles.styleSemiBold24,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              expensesItemModel.price,
+              style: AppStyles.styleSemiBold24(context),
+            ),
           ),
         ],
       ),
@@ -109,16 +125,22 @@ class ActiveExItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 60,
-                height: 60,
-                decoration: ShapeDecoration(
-                    shape: const OvalBorder(),
-                    color: Colors.white.withOpacity(0.1)),
-                child: Image.asset(expensesItemModel.image),
-              ),
-              const SizedBox(
-                width: 56,
+              Flexible(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 60,
+                  ),
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: Container(
+                      decoration: ShapeDecoration(
+                          shape: const OvalBorder(),
+                          color: Colors.white.withOpacity(0.1)),
+                      child:
+                          Center(child: Image.asset(expensesItemModel.image)),
+                    ),
+                  ),
+                ),
               ),
               const Icon(
                 Icons.arrow_forward_ios,
@@ -129,24 +151,35 @@ class ActiveExItem extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          Text(
-            expensesItemModel.title,
-            style: AppStyles.styleSemiBold16.copyWith(color: Colors.white),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              expensesItemModel.title,
+              style: AppStyles.styleSemiBold16(context)
+                  .copyWith(color: Colors.white),
+            ),
           ),
           const SizedBox(
             height: 8,
           ),
-          Text(
-            expensesItemModel.date,
-            style: AppStyles.styleRegular14
-                .copyWith(color: const Color(0xffFAFAFA)),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              expensesItemModel.date,
+              style: AppStyles.styleRegular14(context)
+                  .copyWith(color: const Color(0xffFAFAFA)),
+            ),
           ),
           const SizedBox(
             height: 16,
           ),
-          Text(
-            expensesItemModel.price,
-            style: AppStyles.styleSemiBold24.copyWith(color: Colors.white),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              expensesItemModel.price,
+              style: AppStyles.styleSemiBold24(context)
+                  .copyWith(color: Colors.white),
+            ),
           ),
         ],
       ),
@@ -180,51 +213,54 @@ class _ExpensesItemsListState extends State<ExpensesItemsList> {
         price: r"$20,129"),
   ];
 
-  int selectedIndex = 0;
   void updateIndex(int index) {
     setState(() {
       selectedIndex = index;
     });
   }
 
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Row(
-        children: items.asMap().entries.map((e) {
-      int index = e.key;
-      var item = e.value;
-      if (index == 1) {
-        return Expanded(
-          child: GestureDetector(
-            onTap: () {
-              updateIndex(index);
-              log(selectedIndex.toString());
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: ExpensesItem(
-                expensesItemModel: item,
-                isSelected: selectedIndex == index,
-              ),
-            ),
+    return Row(children: [
+      Expanded(
+        child: GestureDetector(
+          onTap: () {
+            updateIndex(0);
+            log(selectedIndex.toString());
+          },
+          child: ExpensesItem(
+            expensesItemModel: items[0],
+            isSelected: selectedIndex == 0,
           ),
-        );
-      } else {
-        return Expanded(
-          child: GestureDetector(
-            onTap: () {
-              updateIndex(index);
-              log(selectedIndex.toString());
-            },
-            child: ExpensesItem(
-              expensesItemModel: item,
-              isSelected: selectedIndex == index,
-            ),
+        ),
+      ),
+      const SizedBox(width: 8,),
+      Expanded(
+        child: GestureDetector(
+          onTap: () {
+            updateIndex(1);
+            log(selectedIndex.toString());
+          },
+          child: ExpensesItem(
+            expensesItemModel: items[1],
+            isSelected: selectedIndex == 1,
           ),
-        );
-      }
-    }).toList());
+        ),
+      ),
+      const SizedBox(width: 8,),
+      Expanded(
+        child: GestureDetector(
+          onTap: () {
+            updateIndex(2);
+            log(selectedIndex.toString());
+          },
+          child: ExpensesItem(
+            expensesItemModel: items[2],
+            isSelected: selectedIndex == 2,
+          ),
+        ),
+      )
+    ]);
   }
 }
-
-

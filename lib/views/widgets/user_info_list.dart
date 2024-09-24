@@ -12,13 +12,21 @@ class UserInfoList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Image.asset(userInfoo.image),
-      title: Text(
-        userInfoo.title,
-        style: AppStyles.styleSemiBold16,
+      title: FittedBox(
+        alignment: Alignment.centerLeft,
+        fit: BoxFit.scaleDown,
+        child: Text(
+          userInfoo.title,
+          style: AppStyles.styleSemiBold16(context),
+        ),
       ),
-      subtitle: Text(
-        userInfoo.subTitle,
-        style: AppStyles.styleRegular12,
+      subtitle: FittedBox(
+        alignment: Alignment.centerLeft,
+        fit: BoxFit.scaleDown,
+        child: Text(
+          userInfoo.subTitle,
+          style: AppStyles.styleRegular12(context),
+        ),
       ),
     );
   }
